@@ -30,13 +30,13 @@ const Sidebar = () => {
   return (
     <List
       className={`${openSlide ? "!min-w-[16vw] max-w-[16vw]" : "!w-auto"
-        }  shadow-md   !h-screen  !relative !overflow-y-auto !p-2 glass`}
+        }  shadow-md   !h-screen  !relative !overflow-y-auto !p-2 glass !bg-white !bg-opacity-50`}
     >
       <ListItem className="!py-3 !flex !justify-center">
         {openSlide ? (
-          <img alt="" className="Capture !w-32" src={loginLogo} />
+          <img alt="" className="Capture !w-40" src={"https://righttime.fun/static/media/logo.ad6dff20b2f28aad9c95.png"} />
         ) : (
-          <img alt="" className="Capture !w-14 py-8" src={loginLogo} />
+          <img alt="" className="Capture !w-32 py-8" src={"https://righttime.fun/static/media/logo.ad6dff20b2f28aad9c95.png"} />
         )}
       </ListItem>
       <Divider />

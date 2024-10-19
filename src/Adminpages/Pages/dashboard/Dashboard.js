@@ -14,22 +14,29 @@ import MoneyIcon from "@mui/icons-material/Money";
 import { useQuery } from "react-query";
 import ReactApexChart from "react-apexcharts";
 
-import { aviatorChart, businessChart, dashboard_counter_function, registrationCahrt, trxChart, wingoChart } from "../../Services";
+import {
+  aviatorChart,
+  businessChart,
+  dashboard_counter_function,
+  registrationCahrt,
+  trxChart,
+  wingoChart,
+} from "../../Services";
 import { CircularProgress } from "@mui/material";
 import moment from "moment/moment";
 const Dashboard = () => {
   const date_data = [
     moment(Date.now())?.format("DD-MM"),
-    String(new Date().getDate()-1)+"-"+String(new Date().getMonth()+1),
-    String(new Date().getDate()-2)+"-"+String(new Date().getMonth()+1),
-    String(new Date().getDate()-3)+"-"+String(new Date().getMonth()+1),
-    String(new Date().getDate()-4)+"-"+String(new Date().getMonth()+1),
-    String(new Date().getDate()-5)+"-"+String(new Date().getMonth()+1),
-    String(new Date().getDate()-6)+"-"+String(new Date().getMonth()+1),
-    String(new Date().getDate()-7)+"-"+String(new Date().getMonth()+1),
-    String(new Date().getDate()-8)+"-"+String(new Date().getMonth()+1),
-    String(new Date().getDate()-9)+"-"+String(new Date().getMonth()+1)
-  ]
+    String(new Date().getDate() - 1) + "-" + String(new Date().getMonth() + 1),
+    String(new Date().getDate() - 2) + "-" + String(new Date().getMonth() + 1),
+    String(new Date().getDate() - 3) + "-" + String(new Date().getMonth() + 1),
+    String(new Date().getDate() - 4) + "-" + String(new Date().getMonth() + 1),
+    String(new Date().getDate() - 5) + "-" + String(new Date().getMonth() + 1),
+    String(new Date().getDate() - 6) + "-" + String(new Date().getMonth() + 1),
+    String(new Date().getDate() - 7) + "-" + String(new Date().getMonth() + 1),
+    String(new Date().getDate() - 8) + "-" + String(new Date().getMonth() + 1),
+    String(new Date().getDate() - 9) + "-" + String(new Date().getMonth() + 1),
+  ];
   const { isLoading, data: dashboard_data } = useQuery(
     ["dashboard"],
     () => dashboard_counter_function(),
@@ -39,7 +46,7 @@ const Dashboard = () => {
     }
   );
   const dashboard_new_data = dashboard_data?.data?.data?.[0];
-  
+
   const { data: registration } = useQuery(
     ["registrationchart"],
     () => registrationCahrt(),
@@ -48,7 +55,7 @@ const Dashboard = () => {
       refetchOnReconnect: true,
     }
   );
-  const registrationnew_data = registration?.data?.data|| [];
+  const registrationnew_data = registration?.data?.data || [];
 
   const { data: business } = useQuery(
     ["businesschart"],
@@ -58,41 +65,32 @@ const Dashboard = () => {
       refetchOnReconnect: true,
     }
   );
-  const businessnew_data = business?.data?.data|| [];
+  const businessnew_data = business?.data?.data || [];
 
-  const { data: trx } = useQuery(
-    ["trxchart"],
-    () => trxChart(),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-    }
-  );
-  const trxnew_data = trx?.data?.data|| [];
-  
-  const { data: wingo } = useQuery(
-    ["wingochart"],
-    () => wingoChart(),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-    }
-  );
-  const wingonew_data = wingo?.data?.data|| [];
+  const { data: trx } = useQuery(["trxchart"], () => trxChart(), {
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+  });
+  const trxnew_data = trx?.data?.data || [];
 
-  const { data: aviator } = useQuery(
-    ["aviatorchart"],
-    () => aviatorChart(),
-    {
-      refetchOnMount: false,
-      refetchOnReconnect: true,
-    }
-  );
-  const aviatornew_data = aviator?.data?.data|| [];
+  const { data: wingo } = useQuery(["wingochart"], () => wingoChart(), {
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+  });
+  const wingonew_data = wingo?.data?.data || [];
+
+  const { data: aviator } = useQuery(["aviatorchart"], () => aviatorChart(), {
+    refetchOnMount: false,
+    refetchOnReconnect: true,
+  });
+  const aviatornew_data = aviator?.data?.data || [];
 
   const chartState = {
     series: [
-      { name: "Users", data: registrationnew_data?.map(item => item?.["COUNT(id)"] || 0) }
+      {
+        name: "Users",
+        data: registrationnew_data?.map((item) => item?.["COUNT(id)"] || 0),
+      },
     ],
     options: {
       chart: {
@@ -115,7 +113,7 @@ const Dashboard = () => {
         colors: ["transparent"],
       },
       xaxis: {
-        categories: date_data
+        categories: date_data,
       },
       yaxis: {
         title: {
@@ -134,7 +132,12 @@ const Dashboard = () => {
   };
   const businesschartState = {
     series: [
-      { name: "Net Profit", data: businessnew_data?.map(item => item?.["IFNULL(SUM(IFNULL(`tr15_amt`,0)),0)"] || 0) }
+      {
+        name: "Net Profit",
+        data: businessnew_data?.map(
+          (item) => item?.["IFNULL(SUM(IFNULL(`tr15_amt`,0)),0)"] || 0
+        ),
+      },
     ],
     options: {
       chart: {
@@ -157,7 +160,7 @@ const Dashboard = () => {
         colors: ["transparent"],
       },
       xaxis: {
-        categories: date_data
+        categories: date_data,
       },
       yaxis: {
         title: {
@@ -175,31 +178,38 @@ const Dashboard = () => {
     },
   };
   const trxwingochart = {
-    series: [{
-      name: 'series1',
-      data: trxnew_data?.map(item => item?.["IFNULL(SUM(IFNULL(`amount`,0)),0)"] || 0)
-    }, {
-      name: 'series2',
-      data: wingonew_data?.map(item => item?.["IFNULL(SUM(IFNULL(`amount`,0)),0)"] || 0)
-    }],
+    series: [
+      {
+        name: "series1",
+        data: trxnew_data?.map(
+          (item) => item?.["IFNULL(SUM(IFNULL(`amount`,0)),0)"] || 0
+        ),
+      },
+      {
+        name: "series2",
+        data: wingonew_data?.map(
+          (item) => item?.["IFNULL(SUM(IFNULL(`amount`,0)),0)"] || 0
+        ),
+      },
+    ],
     options: {
       chart: {
         height: 350,
-        type: 'area'
+        type: "area",
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
-        curve: 'smooth'
+        curve: "smooth",
       },
       xaxis: {
-        type: 'date',
-        categories: date_data
+        type: "date",
+        categories: date_data,
       },
       tooltip: {
         x: {
-          format: 'dd/MM/yy'
+          format: "dd/MM/yy",
         },
       },
       yaxis: {
@@ -216,94 +226,111 @@ const Dashboard = () => {
         },
       },
     },
-  }
+  };
   const aviatorchart = {
-    series: [ {
-      name: 'series1',
-      data: aviatornew_data?.map(item => item?.["IFNULL(SUM(IFNULL(`amount`,0)),0)"] || 0)
-    }],
+    series: [
+      {
+        name: "series1",
+        data: aviatornew_data?.map(
+          (item) => item?.["IFNULL(SUM(IFNULL(`amount`,0)),0)"] || 0
+        ),
+      },
+    ],
     options: {
       chart: {
         height: 350,
-        type: 'area'
+        type: "area",
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
-        curve: 'smooth'
+        curve: "smooth",
       },
       xaxis: {
-        type: 'date',
-        categories: date_data
+        type: "date",
+        categories: date_data,
       },
       tooltip: {
         x: {
-          format: 'dd/MM/yy'
+          format: "dd/MM/yy",
         },
       },
     },
-  }
+  };
   const dashboardcount1 = {
-
-    series: [dashboard_new_data?.total_game,dashboard_new_data?.total_player,dashboard_new_data?.total_active_user,dashboard_new_data?.today_withdrawal_pending],
+    series: [
+      dashboard_new_data?.total_game,
+      dashboard_new_data?.total_player,
+      dashboard_new_data?.total_active_user,
+      dashboard_new_data?.today_withdrawal_pending,
+    ],
     options: {
       chart: {
         height: 350,
-        type: 'radialBar',
+        type: "radialBar",
       },
       plotOptions: {
         radialBar: {
           dataLabels: {
             name: {
-              fontSize: '22px',
+              fontSize: "22px",
             },
             value: {
-              fontSize: '16px',
+              fontSize: "16px",
             },
             total: {
               show: true,
-              label: 'Total',
+              label: "Total",
               formatter: function (w) {
-               return ;
-              }
-            }
-          }
-        }
+                return;
+              },
+            },
+          },
+        },
       },
-      labels: ['Game', 'Player', 'User', 'WithdrawalPending'],
+      labels: ["Game", "Player", "User", "WithdrawalPending"],
     },
-  }
+  };
   const dashboardcount2 = {
-
-    series: [dashboard_new_data?.total_bets,dashboard_new_data?.total_rejected_withdrawal,dashboard_new_data?.commisstion,dashboard_new_data?.total_withdrawal_approval],
+    series: [
+      dashboard_new_data?.total_bets,
+      dashboard_new_data?.total_rejected_withdrawal,
+      dashboard_new_data?.commisstion,
+      dashboard_new_data?.total_withdrawal_approval,
+    ],
     options: {
       chart: {
         height: 350,
-        type: 'radialBar',
+        type: "radialBar",
       },
       plotOptions: {
         radialBar: {
           dataLabels: {
             name: {
-              fontSize: '22px',
+              fontSize: "22px",
             },
             value: {
-              fontSize: '16px',
+              fontSize: "16px",
             },
             total: {
               show: true,
-              label: 'Total',
+              label: "Total",
               formatter: function (w) {
-                return 
-              }
-            }
-          }
-        }
+                return;
+              },
+            },
+          },
+        },
       },
-      labels: ['Bets', 'Rejected Withdrawal', 'Commission', 'Withdrawal Approval'],
+      labels: [
+        "Bets",
+        "Rejected Withdrawal",
+        "Commission",
+        "Withdrawal Approval",
+      ],
     },
-  }
+  };
   const data = [
     {
       id: 1,
@@ -410,27 +437,57 @@ const Dashboard = () => {
     );
   return (
     <>
-      <div id="chart">
-        <ReactApexChart options={chartState.options} series={chartState.series} type="bar" height={350} />
+      <div id="chart" className="!bg-white !bg-opacity-50 !m-2">
+        <ReactApexChart
+          options={chartState.options}
+          series={chartState.series}
+          type="bar"
+          height={350}
+        />
+      </div>
+      <div className="grid lg:grid-cols-2 grid-cols-1 justify-center w-full  border-t border-gray-600 ">
+        <div id="chart" className=" lg:border-r border-gray-600 !bg-white !bg-opacity-50 !m-2">
+          <ReactApexChart
+            options={trxwingochart.options}
+            series={trxwingochart.series}
+            type="area"
+            height={350}
+          />
+        </div>
+        <div id="chart" className="!bg-white !bg-opacity-50 !m-2">
+          <ReactApexChart
+            options={dashboardcount1.options}
+            series={dashboardcount1.series}
+            type="radialBar"
+            height={400}
+          />
+        </div>
       </div>
       <div className="grid lg:grid-cols-2 grid-cols-1 justify-center w-full  border-t border-gray-600">
-      <div id="chart" className=" lg:border-r border-gray-600">
-          <ReactApexChart options={trxwingochart.options} series={trxwingochart.series} type="area" height={350} />
+        <div id="chart" className=" lg:border-r border-gray-600 !bg-white !bg-opacity-50 !m-2">
+          <ReactApexChart
+            options={dashboardcount2.options}
+            series={dashboardcount2.series}
+            type="radialBar"
+            height={400}
+          />
         </div>
-        <div id="chart" className="">
-          <ReactApexChart options={dashboardcount1.options} series={dashboardcount1.series} type="radialBar" height={400} />
+        <div id="chart" className="!bg-white !bg-opacity-50 !m-2 ">
+          <ReactApexChart
+            options={aviatorchart.options}
+            series={aviatorchart.series}
+            type="area"
+            height={350}
+          />
         </div>
       </div>
-      <div className="grid lg:grid-cols-2 grid-cols-1 justify-center w-full  border-t border-gray-600">
-      <div id="chart" className=" lg:border-r border-gray-600">
-          <ReactApexChart options={dashboardcount2.options} series={dashboardcount2.series} type="radialBar" height={400} />
-        </div>
-      <div id="chart" className=" ">
-          <ReactApexChart options={aviatorchart.options} series={aviatorchart.series} type="area" height={350} />
-        </div>
-      </div>
-      <div id="chart" className="border-t border-gray-600">
-        <ReactApexChart options={businesschartState.options} series={businesschartState.series} type="bar" height={350} />
+      <div id="chart" className="border-t border-gray-600 !bg-white !bg-opacity-50 !m-2">
+        <ReactApexChart
+          options={businesschartState.options}
+          series={businesschartState.series}
+          type="bar"
+          height={350}
+        />
       </div>
       <div className="grid lg:!grid-cols-4 md:!grid-cols-3 sm:grid-cols-1 p-5 gap-[2%] gap-y-4 ">
         {data?.map((i, index) => {
@@ -447,12 +504,9 @@ const Dashboard = () => {
             </div>
           );
         })}
-
       </div>
-
     </>
   );
 };
 
 export default Dashboard;
-
