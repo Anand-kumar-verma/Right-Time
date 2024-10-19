@@ -1,0 +1,215 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #F6F7FE;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fccsb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fccc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fcc {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.fcsb {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fp13 {
+  font-size: 13px !important;
+}
+
+.fp14 {
+  font-size: 14px !important;
+}
+
+.fp15 {
+  font-size: 15px !important;
+
+}
+
+.fp16 {
+  font-size: 16px !important;
+}
+
+.fp17 {
+  font-size: 17px !important;
+}
+
+.fp18 {
+  font-size: 18px !important;
+}
+
+.fp19 {
+  font-size: 19px !important;
+}
+
+.fp20 {
+  font-size: 20px !important;
+}
+
+.fp25 {
+  font-size: 25px !important;
+}
+
+.fp21 {
+  font-size: 21px !important;
+}
+
+.fw100 {
+  font-weight: 100 !important;
+}
+
+.fw200 {
+  font-weight: 200 !important;
+}
+
+.fw300 {
+  font-weight: 300 !important;
+}
+
+.fw400 {
+  font-weight: 400 !important;
+}
+
+.fw500 {
+  font-weight: 500 !important;
+}
+
+.fw600 {
+  font-weight: 600 !important;
+}
+
+.fw700 {
+  font-weight: 700 !important;
+}
+
+.fw800 {
+  font-weight: 800 !important;
+}
+
+.fw900 {
+  font-weight: 900 !important;
+}
+
+.err .css-16n1ayq-MuiFormControl-root>div {
+  background-color: transparent !important;
+}
+
+.w95 {
+  width: 95% !important;
+  margin-left: 2.5% !important;
+}
+
+.w {
+  color: white !important;
+}
+
+.aghy>span>svg>path {
+  color: white !important;
+}
+
+.bdg {
+  margin-top: 15px !important;
+  display: block !important;
+}
+
+.ghistry {
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: white !important;
+}
+
+.flex-b {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #000;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.scratch-area {
+  width: 200px;
+  height: 100px;
+  background: gray;
+  margin: 10px 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.scratch-area.scratched {
+  background: white; /* Change color when scratched */
+}
+
+.message {
+  font-size: 20px;
+  color: blue;
+  position: absolute;
+  top: 20%;
+  left: 10%;
+}
