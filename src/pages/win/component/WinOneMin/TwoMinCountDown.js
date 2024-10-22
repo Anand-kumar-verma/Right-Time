@@ -44,6 +44,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 const TwoMinCountDown = ({ fk, setBetNumber }) => {
   const socket = useSocket();
+  let preValue = 0;
   const dispatch = useDispatch();
   const client = useQueryClient();
   const [three_min_time, setThree_min_time] = useState("0_0");
@@ -80,8 +81,15 @@ const TwoMinCountDown = ({ fk, setBetNumber }) => {
   };
 
   React.useEffect(() => {
-    const handleThreeMin = (onemin) => {
-      let threemin = `${2 - (new Date()?.getMinutes() % 3)}_${onemin}`;
+      const handleThreeMin = (onemin) => {
+        const t = Number(String(onemin)?.split("_")?.[1]);
+        const min = Number(String(onemin)?.split("_")?.[0]);
+  
+        const time_to_be_intro = t > 0 ? 60 - t : t;
+        let threemin = `${2 - (Number(t === 0 ? preValue : min) % 3)
+          }_${time_to_be_intro}`;
+        preValue = min;
+        console.log(threemin);
 
       setThree_min_time(threemin);
       setBetNumber(threemin);

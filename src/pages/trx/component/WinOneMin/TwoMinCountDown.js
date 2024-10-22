@@ -94,8 +94,8 @@ const TwoMinCountDown = ({ fk, setBetNumber }) => {
         // oneMinColorWinning();
       }
       if (
-        threemin?.split("_")?.[1] === "0" &&
-        threemin?.split("_")?.[0] === "0"
+        threemin?.split("_")?.[1] === "58" &&
+        threemin?.split("_")?.[0] === "2"
       ) {
         client.refetchQueries("trx_gamehistory_2");
         client.refetchQueries("my_trx_history_2_temp");
